@@ -11,8 +11,11 @@ Node.js allows us to write server-side javascript based applications with async 
 
 All of the above JavaScript execution model limitations are worked out by Node by providing a runtime and thus allowing to right apps on the server side with concurrent event handling.
 
-### [Express](https://expressjs.com/) Framework for Node apps
+### [Express](https://expressjs.com/) Framework for Node Apps
 Express[(src)](https://github.com/expressjs/express) minimalist framework to write node apps. This is the most popular Node web framework and a lot of other packages are built on top of this. It's not part of Node but is almost considered like that.
+
+### [MongDB](https://www.mongodb.com/) Database for Node Apps
+MogoDB [(src)](https://github.com/mongodb/mongo) is a [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database. The major type of a NoSQL DB [(git topic)](https://github.com/topics/nosql) is a [document oriented database](https://en.wikipedia.org/wiki/Document-oriented_database) aka a document store [(see other types)](https://www.mongodb.com/nosql-explained). Document oriented means that the data is semi structured in the documents. Many document format can be used but [JSON](http://json.org/) is probably the most common document format used in web apps. MongoDB uses JSON. (_Note: Internally MongoDB stores JSON in binary format called BSON_).
 
 ### [NPM](https://www.npmjs.com/) _Node Package Manager_
 npm [(src)](https://github.com/npm/cli) The tool for managing node modules. ```npm install``` is a command that is needed often.
@@ -20,8 +23,8 @@ npm [(src)](https://github.com/npm/cli) The tool for managing node modules. ```n
 ### [Yarn](https://yarnpkg.com/en/)
 yarn [(src)](https://github.com/yarnpkg/yarn/) is similar to npm but with better dependency management. It's getting more popular for larger projects due to stronger required module version management.
 
-
 ## Creating a Node.js App
+
 
 ### What is needed for a Node.js app
 In its simplest form, nothing excpet that node.js should be installed on your system. [link to install](https://nodejs.org/en/download/). But it's important to understand once again that using node.js we write server side applications. So we need to have a webserver, which will come with node's installation.
@@ -85,3 +88,41 @@ app.listen(port, () => console.log ('Server running on localhost at port ${port}
 
 
 Congratulations on your first node.js app using **express**  package.
+
+### The first MongoDB app
+##### Installing MongoDB Server
+In order to use MongoDB, we first need to have a MongoDB server. The easiest option (on Mac) is to download the [MongoDB app](http://gcollazo.github.io/mongodbapp/).
+
+*Note: Thanks to [Giovanni Collazo](https://github.com/gcollazo) for the inspiration. [(app's src)](https://github.com/gcollazo/mongodbapp).*
+Alternatively, you can also install it on Mac using homebrew Instruction are [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/).*
+
+*On other systems, you can install the community edition free from https://www.mongodb.com/download-center/community.*
+*A cloud hosted solution e.g. [mLab] from MongoDB is another option. But it will require a few extra IT steps so I'll skip it for the moment.*
+
+***All the below steps assume that you have installed and laucnhed the mongodb server.***
+
+1. Create a directory for the app and chage to that. ```mkdir node_mongodb_app; cd node_mongodb_app```.
+2. Create the node app package by running ```npm init```. It will ask you some question. You can hit just enter for each of them but to follow the convention make sure to provide a name for for the entry point as **app.js**. The node_mongodb_app will contain a **package.json** file now.
+3. Install the _mongodb_ node package as dependency for the app by running ```npm install mongodb```. This will create **node_modules** subdirectory and **package-lock.json** file. It will also **modify package.json** to add a dependencies section.
+4. Create a java script file in the directory. In the directory create a javascript file. ```touch app.js```
+5. Open the file using whatever editor you prefer e.g. ```vi app.js``` and paste the below code in that file. This code is based upon W3School's guidee from [here](https://www.w3schools.com/nodejs/nodejs_mongodb_create_db.asp)
+```
+var mongodb = require('mongodb')
+
+var mongoDbClient = mongodb.MongoClient;
+var url = 'mongodb://localhost:27017/myFirstMongoDB'
+
+// { useNewUrlParser: true} is required for mongoDB version > 3.0
+// Connect to the DB and passin a callback function that will be called upon a successful connection
+mongoDbClient.connect(url, { useNewUrlParser: true}, function(err, db) {
+    if (!err) {
+        console.log("Database created and connection made");
+        db.close();
+    } else {
+        console.log("Cannot connect to DB. Is the DB server running?");
+    }
+});
+```
+6. Start the app (i.e. launch the webserver) on your system using ```node app.js```. It will launch the webserver and as per the example code will print whether the connection was established or no.
+
+Congratulations on your first node.js app using **MongoDB**.
