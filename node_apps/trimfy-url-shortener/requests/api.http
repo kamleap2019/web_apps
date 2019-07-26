@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/url/shorten
+Content-Type: application/json
+
+# {
+#   "longUrl": "https://www.amazon.com/Sony-Noise-Cancelling-Headphones-WH1000XM3/dp/B07G4MNFS1/ref=sr_1_1?keywords=sony+mdx+1000&qid=1563646981&s=gateway&sr=8-1"
+# }
+
+{
+  "longUrl": ""
+}
