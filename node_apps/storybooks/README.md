@@ -9,3 +9,4 @@ This app was created following Udemy's Node.js, Express & MongoDB Dev to Deploym
 https://www.udemy.com/nodejs-express-mongodb-dev-to-deployment/
 
 
+npm install passport passport-google-oauth express
