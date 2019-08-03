@@ -1,0 +1,19 @@
+{
+  "name": "node_snips_voice_ai_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "snips-start.sh; node app.js"
+  },
+  "keywords": [
+    "snips",
+    "voice"
+  ],
+  "author": "Kaleem",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^3.0.0"
+  }
+}
